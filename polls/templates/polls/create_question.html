@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Создать вопрос</h1>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <label>Вопрос: {{ form.question_text }}</label>
+  <p>Краткое описание вопроса: {{ form.short_description }}</p>
+  <p>Подробное описание вопроса:
+    {{ form.full_description }}
+  </p>
+  <p>Изображение к вопросу: {{ form.image }}</p>
+  <label>Варианты ответов (разделяйте через запятую):
+    {{ form.choices }}
+  </label>
+  <button type="submit">Создать</button>
+  <a href="{% url 'polls:profile' %}">Назад к профилю</a>
+</form>
+
+{% endblock %}

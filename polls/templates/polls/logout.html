@@ -1,0 +1,6 @@
+   {% extends 'base.html' %}
+   {% block content %}
+   <h1>Выход</h1>
+   <p>Вы успешно вышли из системы.</p>
+   <a href="{% url 'polls:index' %}">Вернуться на главную страницу</a>
+   {% endblock %}
