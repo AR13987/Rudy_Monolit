@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ question.question_text }}</h1>
+
+{% if question.image %}
+    <img src="{{ question.image.url }}" alt="Изображение к вопросу" height="200">
+{% endif %}
+
+<p>{{ question.question_text|safe }}</p>
+
+{% if not expired %}
+    <form action="{% url 'polls:vote' question.id %}" method="post">
+        {% csrf_token %}
+        {% for choice, votes in choice_votes %}
+            <br><input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+            <label for="choice{{ forloop.counter }}">{{ choice.choice_text }} ({{ votes }} голосов)</label><br>
+        {% endfor %}
+        <input type="submit" value="Проголосовать">
+    </form>
+{% else %}
+    <p>Срок голосования по этому вопросу истек.</p>
+{% endif %}
+{% endblock %}

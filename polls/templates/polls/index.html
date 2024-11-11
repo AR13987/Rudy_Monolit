@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <h1>Последние вопросы</h1>
+    {% for question in latest_question_list %}
+      <label>
+        <a href="{% url 'polls:detail' question.id %}">
+          {{ question.question_text }}
+        </a>
+        <br>{% if question.image %}
+        <img src="{{ question.image.url }}" alt="Изображение к вопросу" height="500">
+    {% endif %}<br>
+      </label>
+    {% endfor %}
+{% endblock %}

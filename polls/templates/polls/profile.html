@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <h1>Профиль</h1>
+
+    {% if user_profile.avatar %}
+        <img src="{{ user_profile.avatar.url }}" alt="Аватар пользователя" class="rounded-circle" width="400" height="400">
+    {% else %}
+        <img src="{% static '/polls/user_avatars/default_avatar.jpg' %}" alt="Аватар пользователя" class="rounded-circle" width="400" height="400">
+    {% endif %}
+
+    <p>Логин пользователя: {{ user.username }}</p>
+    <p>Имя: {{ user_profile.first_name }}</p>
+    <p>Фамилия: {{ user_profile.last_name }}</p>
+    <p>Номер телефона: {{ user_profile.phone_number }}</p>
+    <p>Пол: {{ user_profile.get_gender_display }}</p>
+    <p>Email: {{ user_profile.email }}</p>
+    <a href="{% url 'polls:create_question' %}">Создать вопрос</a>
+    <a href="{% url 'polls:edit_profile' %}">Редактировать профиль</a>
+    <a href="{% url 'polls:delete_profile' %}">Удалить профиль</a>
+{% endblock %}
